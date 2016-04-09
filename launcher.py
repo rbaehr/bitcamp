@@ -1,13 +1,11 @@
 from PIL import ImageGrab
 from PIL import Image
-import time
-#from planar import BoundingBox
+import time, serial, syslog
+
+port = '/dev/ttyACM4'
+ard = serial.Serial(port,9600,timeout=5)
 #(255, 162, 41)
 NORMAL = (255, 162, 41)
-# (minx,miny), (maxx, miny), (maxx, maxy), (minx, maxy)
-#bbox = BoundingBox([(1175,671),(1177,671),(1177,673),(1175,673)])
-#img = ImageGrab.grab(bbox)
-#print(img.getpixel((0,0)))
 
 time.sleep(7)
 
@@ -18,7 +16,9 @@ while True:
 
 	print(pix)
 	if pix != NORMAL:
-		print("GO")
+		print("GO, sent to " + port)
+                ard.flush()
+                ard.write(1)
 		break
 	print("dont go")
 
