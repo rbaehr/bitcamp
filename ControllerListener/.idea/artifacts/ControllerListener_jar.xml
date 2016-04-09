@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="ControllerListener:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/ControllerListener_jar</output-path>
+    <root id="archive" name="ControllerListener.jar">
+      <element id="module-output" name="ControllerListener" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/jxinput.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
