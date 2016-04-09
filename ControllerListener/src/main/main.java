@@ -1,15 +1,14 @@
 package main;
 
 
-import net.java.games.input.Controller;
-import net.java.games.input.ControllerEnvironment;
-import net.java.games.input.Event;
-import net.java.games.input.EventQueue;
+import net.java.games.input.*;
+import sun.security.x509.CertificatePolicyMap;
 
 import java.io.*;
 import java.lang.reflect.Field;
 import java.security.CodeSource;
 import java.util.HashMap;
+import java.util.TreeMap;
 
 
 /**
@@ -17,21 +16,62 @@ import java.util.HashMap;
  */
 public class main {
 
+    static class ButtonMap{
+        HashMap<Component.Identifier, Double> tmap;
+
+        public ButtonMap(){
+            tmap = new HashMap<>();
+            tmap.put(Component.Identifier.Button._1, 0.0);
+           // tmap.put(Component.Identifier.Button._2, 0.0);
+            tmap.put(Component.Identifier.Button._6, 0.0);
+            tmap.put(Component.Identifier.Axis.X, 0.0);
+            tmap.put(Component.Identifier.Axis.Y, 0.0);
+            tmap.put(Component.Identifier.Axis.Z, 0.0);
+        }
+
+        public boolean put(Component.Identifier ci, double d ){
+            if(tmap.containsKey(ci)){
+                tmap.put(ci, d);
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        public String get(long time){
+            StringBuilder s = new StringBuilder(Long.toString(time));
+            s.append(tmap.get(Component.Identifier.Button._1) + ",");
+           // s.append(tmap.get(Component.Identifier.Button._2) + ",");
+            s.append(tmap.get(Component.Identifier.Button._6) + ",");
+            s.append(tmap.get(Component.Identifier.Axis.X) + ",");
+            s.append(tmap.get(Component.Identifier.Axis.Y) + ",");
+            s.append(tmap.get(Component.Identifier.Axis.Z));
+
+            return s.toString();
+        }
+    }
+
     static double triggerLimit = .5;
 
     public static void main(String args[]){
-        FileWriter fw = null;
-        BufferedWriter bw = null;
-        PrintWriter out = null;
+        FileWriter fw = null, fc = null;
+        BufferedWriter bw = null, bc = null;
+        PrintWriter out = null, outc = null;
         try {
             fw = new FileWriter("control.log", false);
+            fc = new FileWriter("controldoc.csv", false);
             bw = new BufferedWriter(fw);
+            bc = new BufferedWriter(fc);
             out = new PrintWriter(bw);
+            outc = new PrintWriter(bc);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        out.println("[00000] Begin log");
+        out.println("[0000] Begin log");
+        outc.println("time, 1, 6, x, y, z");
+        outc.println("0, 0, 0, 0, 0, 0");
         out.flush();
+        outc.flush();
         CodeSource codeSource = main.class.getProtectionDomain().getCodeSource();
         File jarFile = null;
         try {
@@ -59,6 +99,7 @@ public class main {
         Event event = new Event();
         Long time = System.currentTimeMillis();
         HashMap<String, Double> axes =  new HashMap<>();
+        ButtonMap map = new ButtonMap();
         while(true){
             xbox.poll();
             long eventT = ot(time);
@@ -68,10 +109,13 @@ public class main {
                     if(axes.containsKey(name)){
                         if(event.getValue() > triggerLimit && axes.get(name) < triggerLimit){
                             axes.put(name, triggerLimit);
+                            map.put(event.getComponent().getIdentifier(), 1.0);
                         }else if(event.getValue() < -triggerLimit && axes.get(name) > -triggerLimit){
                             axes.put(name, -triggerLimit);
+                            map.put(event.getComponent().getIdentifier(), -1.0);
                         }else if(Math.abs(event.getValue()) < triggerLimit && Math.abs(axes.get(name)) >= triggerLimit){
                             axes.put(name, 0.0);
+                            map.put(event.getComponent().getIdentifier(), 0.0);
                         }else{
                             //don't print
                             continue;
@@ -79,14 +123,20 @@ public class main {
                     }else{
                         axes.put(name, 0.0);
                     }
+                }else{
+                    map.put(event.getComponent().getIdentifier(), event.getValue());
                 }
                 String output = "[" + eventT + "] " + event.getComponent().getName() + " : " + event.getValue();
                 System.out.println(output);
                 try {
                     out.println(output);
-                }catch(NullPointerException ex){}
+                    outc.println(map.get(eventT));
+                }catch(NullPointerException ex){
+                    ex.printStackTrace();
+                }
             }
             out.flush();
+            outc.flush();
         }
 
     }
@@ -109,6 +159,9 @@ public class main {
         sysPathsField.setAccessible(true);
         sysPathsField.set(null, null);
     }
+
+
+
 
 
 }
