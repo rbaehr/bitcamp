@@ -104,6 +104,9 @@ public class main {
             xbox.poll();
             long eventT = ot(time);
             while(eq.getNextEvent(event)){
+                map.put(event.getComponent().getIdentifier(), event.getValue());
+                outc.println(map.get(eventT));
+                
                 if(event.getComponent().isAnalog()){
                     String name = event.getComponent().getName();
                     if(axes.containsKey(name)){
@@ -124,13 +127,11 @@ public class main {
                         axes.put(name, 0.0);
                     }
                 }
-                map.put(event.getComponent().getIdentifier(), event.getValue());
 
                 String output = "[" + eventT + "] " + event.getComponent().getName() + " : " + event.getValue();
                 System.out.println(output);
                 try {
                     out.println(output);
-                    outc.println(map.get(eventT));
                 }catch(NullPointerException ex){
                     ex.printStackTrace();
                 }
