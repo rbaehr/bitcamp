@@ -5,19 +5,11 @@
       <artifact name="ControllerListener:jar" />
     </artifacts-to-build>
   </component>
+  <component name="BookmarkManager">
+    <bookmark url="file://$PROJECT_DIR$/src/main/main.java" line="125" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="ccbaaf43-df97-45ee-9b8d-c3364ddfd486" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/ControllerListener/control.log" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/ControllerListener/jinput-dx8.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/ControllerListener/jinput-dx8_64.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/ControllerListener/jinput-raw.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/ControllerListener/jinput-raw_64.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/ControllerListener/jinput-wintab.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/ControllerListener/libjinput-linux.so" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/ControllerListener/libjinput-linux64.so" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/ControllerListener/ControllerListener.jar" afterPath="$PROJECT_DIR$/out/artifacts/ControllerListener/ControllerListener.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ControllerListener/main/main.class" afterPath="$PROJECT_DIR$/out/production/ControllerListener/main/main.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/main.java" afterPath="$PROJECT_DIR$/src/main/main.java" />
     </list>
     <ignored path="ControllerListener.iws" />
@@ -43,12 +35,12 @@
       <file leaf-file-name="main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="588">
-              <caret line="35" column="18" selection-start-line="35" selection-start-column="18" selection-end-line="35" selection-end-column="18" />
+            <state relative-caret-position="0">
+              <caret line="107" column="38" selection-start-line="107" selection-start-column="38" selection-end-line="107" selection-end-column="38" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#5291#5292#0" expanded="true" />
-                <element signature="e#5349#5350#0" expanded="true" />
+                <element signature="e#5271#5272#0" expanded="true" />
+                <element signature="e#5329#5330#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -502,7 +494,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="-10" width="2560" height="1450" extended-state="7" />
+    <frame x="0" y="-10" width="2560" height="1450" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -553,12 +545,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="588">
-          <caret line="35" column="18" selection-start-line="35" selection-start-column="18" selection-end-line="35" selection-end-column="18" />
+        <state relative-caret-position="0">
+          <caret line="107" column="38" selection-start-line="107" selection-start-column="38" selection-end-line="107" selection-end-column="38" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#5291#5292#0" expanded="true" />
-            <element signature="e#5349#5350#0" expanded="true" />
+            <element signature="e#5271#5272#0" expanded="true" />
+            <element signature="e#5329#5330#0" expanded="true" />
           </folding>
         </state>
       </provider>

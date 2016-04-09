@@ -109,13 +109,13 @@ public class main {
                     if(axes.containsKey(name)){
                         if(event.getValue() > triggerLimit && axes.get(name) < triggerLimit){
                             axes.put(name, triggerLimit);
-                            map.put(event.getComponent().getIdentifier(), 1.0);
+                            //map.put(event.getComponent().getIdentifier(), 1.0);
                         }else if(event.getValue() < -triggerLimit && axes.get(name) > -triggerLimit){
                             axes.put(name, -triggerLimit);
-                            map.put(event.getComponent().getIdentifier(), -1.0);
+                           // map.put(event.getComponent().getIdentifier(), -1.0);
                         }else if(Math.abs(event.getValue()) < triggerLimit && Math.abs(axes.get(name)) >= triggerLimit){
                             axes.put(name, 0.0);
-                            map.put(event.getComponent().getIdentifier(), 0.0);
+                           // map.put(event.getComponent().getIdentifier(), 0.0);
                         }else{
                             //don't print
                             continue;
@@ -123,9 +123,9 @@ public class main {
                     }else{
                         axes.put(name, 0.0);
                     }
-                }else{
-                    map.put(event.getComponent().getIdentifier(), event.getValue());
                 }
+                map.put(event.getComponent().getIdentifier(), event.getValue());
+
                 String output = "[" + eventT + "] " + event.getComponent().getName() + " : " + event.getValue();
                 System.out.println(output);
                 try {
