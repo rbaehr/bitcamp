@@ -1,6 +1,6 @@
 import time, serial
 
-port =  'dev/ttyACM4'
+port =  'COM12'
 ard = serial.Serial(port, 9600, timeout=5)
 
 #these are the byte codes we'll send to the arduino
@@ -18,7 +18,7 @@ boost = 0b1
 
 noJump = 0b0
 jump = 0b1
-
+	#{0 0 boost jump right left backward forward)
 csv = open('control.csv')
 
 def parse_line():
@@ -36,15 +36,16 @@ accel = noBoost
 air = noJump
 
 cmds = parse_line()
-timeCsv = cmds[0]
+timeCsv =float(cmds[0])
 loop_delta = 0
 bit_o = 0
 
 while cmds is not -1:
 	#read the time till next event and sleep until it
+	delta = float(cmds[0]) - timeCsv
+	print("delta {d}\tloop_delta {dl}\tdiff: {diff}".format(d=delta, dl=loop_delta, diff=(delta-loop_delta)))
+	time.sleep((delta - loop_delta)/1000) 
 	timeLocal = c_milli()
-	delta = cmds[1] - timeCsv
-	time.sleep(delta / 1000 - loop_delta) 
 	bit = 0
 
 	if float(cmds[1]) == 1 and accel == noBoost:
@@ -52,7 +53,7 @@ while cmds is not -1:
 	elif float(cmds[1]) == 0 and accel == boost:
 		accel = noBoost
 
-	bit &= accel
+	bit |= accel
 
 	if float(cmds[2]) == 1 and air == noJump:
 		air = jump
@@ -60,7 +61,7 @@ while cmds is not -1:
 		air = noJump
 
 	bit = bit << 1
-	bit &= air
+	bit |= air
 
 	if float(cmds[3]) > .2 and turn != right:
 		turn = right
@@ -70,7 +71,7 @@ while cmds is not -1:
 		turn = noTurn
 
 	bit = bit << 2
-	bit &= turn
+	bit |= turn
 
 	if float(cmds[4]) > .2 and speed != forward:
 		speed = forward
@@ -80,12 +81,15 @@ while cmds is not -1:
 		speed = stop
 
 	bit = bit << 2
-	bit &= speed
+	bit |= speed
 
+	print("bit: {b}\tbit old:{b2}".format(b=bit, b2=bit_o))
 	if bit != bit_o:
+		print("sending bit")
 		bit_o = bit
-		ard.write(bit)
 		ard.flush()
-
+		ard.write(bytes([bit]))
+	
+	timeCsv = float(cmds[0])
 	cmds = parse_line()
 	loop_delta = c_milli() - timeLocal
