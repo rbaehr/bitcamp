@@ -4,35 +4,43 @@
 #define FORBACK 5
 #define JUMPBOOST 6
 
-#define NEUTRAL 30 
-#define UP 60
-#define DOWN 0
+
 Servo lr;
 Servo fb;
 Servo jb;
 
 void left() {
-  
+  //s
+  lr.write(45);
 }
 
 void right() {
-  
+  //x
+    lr.write(30);
 }
 
 void forw() {
+  //[
+  fb.write(36);
   
 }
 
 void back() {
+  //'
+  fb.write(52);
+  
   
 }
 
 void boost() {
+   //j
+   jb.write(17);
    
 }
 
-void jump(int d) {
-  
+void jump() {
+  //u
+  jb.write(32);
 }
 
 void flip() {
@@ -40,13 +48,14 @@ void flip() {
 }
 
 void resetall(){
-  lr.write(NEUTRAL);
-  fb.write(NEUTRAL);
-  jb.write(NEUTRAL);
+  lr.write(36);
+  fb.write(45);
+  jb.write(25);
 }
+
+
 void setup() {
   Serial.begin(9600); 
-  pinMode(13, OUTPUT);
   lr.attach(LEFTRIGHT);
   fb.attach(FORBACK);
   jb.attach(JUMPBOOST);
