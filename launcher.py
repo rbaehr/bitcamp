@@ -1,9 +1,9 @@
 from PIL import ImageGrab
 from PIL import Image
-import time, serial, syslog
+import time, serial
 
-port = '/dev/ttyACM4'
-ard = serial.Serial(port,9600,timeout=5)
+port = 'COM10'
+#ard = serial.Serial(port,9600,timeout=5)
 #(255, 162, 41)
 NORMAL = (255, 162, 41)
 
@@ -17,8 +17,8 @@ while True:
 	print(pix)
 	if pix != NORMAL:
 		print("GO, sent to " + port)
-                ard.flush()
-                ard.write(1)
+#		ard.flush()
+#		ard.write(b'1')
 		break
 	print("dont go")
 

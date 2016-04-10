@@ -7,15 +7,22 @@ void setup() {
 }
 
 void loop() {
+//  #{0 0 boost jump right left backward forward)
 
         // send data only when you receive data:
         if (Serial.available() > 0) {
                 // read the incoming byte:
                 incomingByte = Serial.read();
+                Serial.flush();
 
                 // say what you got:
                 Serial.print("I received: ");
-                digitalWrite(13, HIGH);
+                if(incomingByte == 16){
+                  digitalWrite(13, HIGH); 
+                  delay(100);
+                  digitalWrite(13,LOW); 
+                }
+                
                 Serial.println(incomingByte, DEC);
         }
 }

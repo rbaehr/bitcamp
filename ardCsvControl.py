@@ -19,7 +19,7 @@ boost = 0b1
 noJump = 0b0
 jump = 0b1
 	#{0 0 boost jump right left backward forward)
-csv = open('control.csv')
+csv = open('ControllerListener/out/artifacts/ControllerListener/controldoc.csv')
 
 def parse_line():
 	line = csv.readline()
@@ -34,6 +34,7 @@ speed = stop
 turn = noTurn
 accel = noBoost
 air = noJump
+parse_line()
 
 cmds = parse_line()
 timeCsv =float(cmds[0])
@@ -44,7 +45,8 @@ while cmds is not -1:
 	#read the time till next event and sleep until it
 	delta = float(cmds[0]) - timeCsv
 	print("delta {d}\tloop_delta {dl}\tdiff: {diff}".format(d=delta, dl=loop_delta, diff=(delta-loop_delta)))
-	time.sleep((delta - loop_delta)/1000) 
+	t_delta = (delta - loop_delta)/1000
+	time.sleep(t_delta if t_delta > 0 else 0) 
 	timeLocal = c_milli()
 	bit = 0
 
