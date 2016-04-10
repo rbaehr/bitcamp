@@ -9,9 +9,7 @@
     <bookmark url="file://$PROJECT_DIR$/src/main/main.java" line="128" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ccbaaf43-df97-45ee-9b8d-c3364ddfd486" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/main.java" afterPath="$PROJECT_DIR$/src/main/main.java" />
-    </list>
+    <list default="true" id="ccbaaf43-df97-45ee-9b8d-c3364ddfd486" name="Default" comment="" />
     <ignored path="ControllerListener.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
