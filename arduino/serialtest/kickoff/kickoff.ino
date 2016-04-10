@@ -5,9 +5,30 @@
 #define JUMPBOOST 6
 
 
+#define LR 36
+#define FB 45
+#define JB 25
+
+
 Servo lr;
 Servo fb;
 Servo jb;
+
+void lrreset() {
+  //s
+  lr.write(LR);
+}
+
+void fbreset() {
+  //x
+    lr.write(FB);
+}
+
+void jbreset() {
+  //[
+  fb.write(JB);
+  
+}
 
 void left() {
   //s
@@ -19,13 +40,13 @@ void right() {
     lr.write(30);
 }
 
-void forw() {
+void forward() {
   //[
   fb.write(36);
   
 }
 
-void back() {
+void backward() {
   //'
   fb.write(52);
   
@@ -39,7 +60,7 @@ void boost() {
 }
 
 void jump() {
-  //u
+ //u
   jb.write(32);
 }
 
@@ -48,9 +69,9 @@ void flip() {
 }
 
 void resetall(){
-  lr.write(36);
-  fb.write(45);
-  jb.write(25);
+  lr.write(LR);
+  fb.write(FB);
+  jb.write(JB);
 }
 
 
@@ -63,13 +84,39 @@ void setup() {
   
 }
 
-void loop() {
-{ 
+void loop() 
+{
   if (Serial.available() > 0) {
-    int b = Serial.parseInt();
-    lr.write(b);
-    jb.write(b);
-    fb.write(b);
-    }
-} 
+//  	#{0 0 boost jump right left backward forward)
+
+    int b = Serial.read();
+    if ( b&1) {
+	    forward();
+	  } else if ((b>>1)&1) {
+	    backward();
+	  } else {
+	    fbreset();
+	  }
+	if ( (b>>2)&1) {
+	    left();
+	  } else if ( (b>>3)&1) {
+	    right();
+	  } else {
+	    lrreset();
+	  }
+    if ( (b>>4)&1) {
+	    jump();
+	  } else if ( (b>>5)&1) {
+	    boost();
+	  } else {
+	    jbreset();
+	  }
+	  if (b & 128) {
+      resetall();
+		while ( b != 64) {
+			b = Serial.read();
+			delay(100);
+		}
+	  }
+  }
 }

@@ -93,3 +93,5 @@ while cmds is not -1:
 	timeCsv = float(cmds[0])
 	cmds = parse_line()
 	loop_delta = c_milli() - timeLocal
+ard.flush()
+ard.write(bytes([128]))
