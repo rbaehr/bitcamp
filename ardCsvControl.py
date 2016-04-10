@@ -64,7 +64,7 @@ while cmds is not -1:
 
 	if float(cmds[3]) > .2 and turn != right:
 		turn = right
-	elif float(cmds[3]) < .2 and turn != left:
+	elif float(cmds[3]) < -.2 and turn != left:
 		turn = left
 	elif turn != noTurn:
 		turn = noTurn
@@ -74,7 +74,7 @@ while cmds is not -1:
 
 	if float(cmds[4]) > .2 and speed != forward:
 		speed = forward
-	elif float(cmds[4]) < .2 and speed != back:
+	elif float(cmds[4]) < -.2 and speed != back:
 		speed = back
 	elif speed != stop:
 		speed = stop
