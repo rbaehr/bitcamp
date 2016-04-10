@@ -21,12 +21,12 @@ public class main {
 
         public ButtonMap(){
             tmap = new HashMap<>();
-            tmap.put(Component.Identifier.Button._1, 0.0);
+            tmap.put(Component.Identifier.Button._0, 0.0);
            // tmap.put(Component.Identifier.Button._2, 0.0);
-            tmap.put(Component.Identifier.Button._6, 0.0);
+            tmap.put(Component.Identifier.Button._5, 0.0);
             tmap.put(Component.Identifier.Axis.X, 0.0);
             tmap.put(Component.Identifier.Axis.Y, 0.0);
-            tmap.put(Component.Identifier.Axis.Z, 0.0);
+            tmap.put(Component.Identifier.Axis.RZ, 0.0);
         }
 
         public boolean put(Component.Identifier ci, double d ){
@@ -40,9 +40,9 @@ public class main {
 
         public String get(long time){
             StringBuilder s = new StringBuilder(Long.toString(time) + ",");
-            s.append(tmap.get(Component.Identifier.Button._1) + ",");
+            s.append(tmap.get(Component.Identifier.Button._0) + ",");
            // s.append(tmap.get(Component.Identifier.Button._2) + ",");
-            s.append(tmap.get(Component.Identifier.Button._6) + ",");
+            s.append(tmap.get(Component.Identifier.Button._5) + ",");
             s.append(tmap.get(Component.Identifier.Axis.X) + ",");
             s.append(tmap.get(Component.Identifier.Axis.Y) + ",");
             s.append(tmap.get(Component.Identifier.Axis.RZ));
