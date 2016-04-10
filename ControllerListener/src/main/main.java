@@ -39,13 +39,13 @@ public class main {
         }
 
         public String get(long time){
-            StringBuilder s = new StringBuilder(Long.toString(time));
+            StringBuilder s = new StringBuilder(Long.toString(time) + ",");
             s.append(tmap.get(Component.Identifier.Button._1) + ",");
            // s.append(tmap.get(Component.Identifier.Button._2) + ",");
             s.append(tmap.get(Component.Identifier.Button._6) + ",");
             s.append(tmap.get(Component.Identifier.Axis.X) + ",");
             s.append(tmap.get(Component.Identifier.Axis.Y) + ",");
-            s.append(tmap.get(Component.Identifier.Axis.Z));
+            s.append(tmap.get(Component.Identifier.Axis.RZ));
 
             return s.toString();
         }
@@ -106,7 +106,7 @@ public class main {
             while(eq.getNextEvent(event)){
                 map.put(event.getComponent().getIdentifier(), event.getValue());
                 outc.println(map.get(eventT));
-                
+
                 if(event.getComponent().isAnalog()){
                     String name = event.getComponent().getName();
                     if(axes.containsKey(name)){
